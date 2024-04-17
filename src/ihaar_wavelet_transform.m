@@ -11,7 +11,7 @@ function signal = ihaar_wavelet_transform(approx, detail)
     
     % Reconstruct the signal from approximation and detail coefficients
     for i = 1:length(approx)
-        signal(2*i-1) = (approx(i) + detail(i)) / sqrt(2); % Reconstruct original value
-        signal(2*i) = (approx(i) - detail(i)) / sqrt(2);   % Reconstruct original value
+        signal(2*i-1) = (approx(i) + detail(i)) / sqrt(2);
+        signal(2*i) = (approx(i) - detail(i)) / sqrt(2);
     end
 end

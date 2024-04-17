@@ -23,6 +23,10 @@ function compress_and_save_image(original_image_path, compressed_image_path, thr
     % Compress the image
     compressed_image = compress_image(original_image, threshold);
     
+    % Calculate the PSNR value
+    psnr_value = psnr(compressed_image, original_image);
+    fprintf('PSNR value: %.4f dB\n', psnr_value);
+    
     % Save the compressed image
     imwrite(compressed_image, compressed_image_path);
     
