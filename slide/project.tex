@@ -1,7 +1,8 @@
 \documentclass{beamer}
 
 \usepackage{hyperref}
-
+\usepackage{graphicx}
+\usepackage{subcaption}
 \usepackage{tcolorbox}
 \tcbuselibrary{theorems}
 
@@ -59,35 +60,78 @@
 % table of contents
 %\toc{enum}
 %\toc{mindmap}
-\section{Introduction}
+\section{Background Information}
 
-\section{Wavelet transform in compression}
-\begin{frame}{Use Harr wavelet to compress a matrix}
+\begin{frame}{Fourier Transform}
 
-\begin{columns}[T,onlytextwidth]
-
-	\column{.5\textwidth}
+	$F(\omega) = \int_{-\infty}^{\infty} f(t) \cdot e^{-i\omega t} \, dt$:
+	\begin{itemize}
+		\item  convert a function from the time domain to the frequency domain
+		\item base function : sine and cosine
+	\end{itemize}
 	
 	\centering
-	\includegraphics[width=.9\columnwidth]{image/haar_1}
-	\column{.5\textwidth}
-	\begin{theorem}
-		\text{Define} \begin{equation} \psi (n)=\left \{
-		\begin{aligned}
-		 \frac{1}{2} \quad 1 \leq n \leq 2\\
-		-\frac{1}{2} \quad 3 \leq n \leq 4\\
-		0 \quad otherwise\\
-		\end{aligned} 
-		\right 
-		.
-		\end{equation}\\
-		\text{and} $\quad \psi_{j,k} (x)=\psi(2^jx-k).$
-\end{theorem}
-\end{columns}
+	\includegraphics[width=.8\columnwidth]{Image/p1.png}
 
+\medskip
+	
 \end{frame}
 
+\begin{frame}{Fourier Transform}
+	Advantage:
+	\begin{itemize}
+	\item  provides information about the frequency components of a signal
+		\item  linearity makes it easy to analyze and process complex signals
+	\end{itemize}
+	
+	Disadvantage:
+	\begin{itemize}
+		\item  cannot provide precise time resolution for narrow pulse signals
+	
+		\includegraphics[width=.6\columnwidth]{Image/p2.png}
+			
+	\end{itemize}
+\end{frame}
 
+\begin{frame}{Wavelet Transform}
+	Goal:
+	\begin{itemize}
+		\item  better represent signal with abrupt change
+			\item  provide more precise time resolution
+	 \end{itemize}
+	Solution:
+	\begin{itemize}
+		\item  change base functions to both time-localized and frequency-localized wavelet functions
+	\end{itemize}
+	
+	\begin{figure}[h!]
+		\centering
+		\begin{subfigure}[b]{0.32\linewidth}
+			\includegraphics[width=\linewidth]{Image/p3.png}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[b]{0.32\linewidth}
+			\includegraphics[width=\linewidth]{Image/p4.png}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[b]{0.32\linewidth}
+			\includegraphics[width=\linewidth]{Image/p5.png}
+		\end{subfigure}
+	\end{figure}
+	
+	
+\end{frame}
+
+\begin{frame}{Limitation of Wavelet Transform}
+
+	Time-Frequency Uncertainty:
+	\begin{itemize}
+		\item dilemma in signal processing where it is impossible to precisely determine both the time and frequency information of a signal 
+	\end{itemize}
+	
+\end{frame}
+
+\section{Wavelet transform in compression}
 
 \begin{frame}{Use Harr wavelet to compress a matrix}
 For a matrix $A \in\ M_8$,
@@ -95,14 +139,14 @@ For a matrix $A \in\ M_8$,
 {
 \[
 H_1 = \left(\begin{array}{cccccccc}
-\frac{1}{2} & 0 & 0 & 0 & \frac{1}{2} & 0& 0& 0\\
-\frac{1}{2} & 0 & 0 & 0 & -\frac{1}{2} & 0& 0& 0 \\
-0 & \frac{1}{2} & 0 & 0 & 0 & \frac{1}{2}& 0& 0 \\
-0 & \frac{1}{2} & 0 & 0 & 0 & -\frac{1}{2}& 0& 0 \\
-0&0 & \frac{1}{2} & 0 & 0 & 0 & \frac{1}{2}& 0 \\
-0&0 & \frac{1}{2} & 0 & 0 & 0 & -\frac{1}{2}& 0 \\
-0&0&0 & \frac{1}{2} & 0 & 0 & 0 & \frac{1}{2}\\
-0&0&0 & \frac{1}{2} & 0 & 0 & 0 & -\frac{1}{2}
+\frac{1}{2} & 0 & 0 & 0 & \frac{1}{2} & 0 & 0 & 0\\
+\frac{1}{2} & 0 & 0 & 0 & -\frac{1}{2} & 0 & 0 & 0 \\
+0 & \frac{1}{2} & 0 & 0 & 0 & \frac{1}{2} & 0 & 0 \\
+0 & \frac{1}{2} & 0 & 0 & 0 & -\frac{1}{2} & 0 & 0 \\
+0 & 0 & \frac{1}{2} & 0 & 0 & 0 & \frac{1}{2} & 0 \\
+0 & 0 & \frac{1}{2} & 0 & 0 & 0 & -\frac{1}{2} & 0 \\
+0 & 0 & 0 & \frac{1}{2} & 0 & 0 & 0 & \frac{1}{2}\\
+0 & 0 & 0 & \frac{1}{2} & 0 & 0 & 0 & -\frac{1}{2}
 \end{array}\right)
 \]
 \[
